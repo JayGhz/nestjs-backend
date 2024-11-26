@@ -3,5 +3,8 @@
         "*.controller.ts": "nest-controller",
         "*.service.ts": "nest-service",
         "*.module.ts": "nest",
-    }
+    },
+    "symbols.folders.associations": {
+        "test": "folder-sky",
+    },
 }
