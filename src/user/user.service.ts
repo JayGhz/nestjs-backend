@@ -7,8 +7,7 @@ import { UserProfileDto } from './dto/user-profile.dto';
 
 @Injectable()
 export class UserService {
-
-  constructor(private prismaService: PrismaService) { }
+  constructor(private prismaService: PrismaService) {}
 
   private async createUserWithRole(email: string, password: string, roleName: string) {
     const existingUser = await this.prismaService.user.findUnique({ where: { email } });
@@ -30,19 +29,17 @@ export class UserService {
     });
   }
 
-
   private async buildResponse(user: User & { role: Role; authors?: Author; customers?: Customer }): Promise<UserProfileDto> {
     const userProfileDto = new UserProfileDto();
 
     userProfileDto.id = user.id;
     userProfileDto.email = user.email;
-    userProfileDto.role = user.role.name;  // Aquí solo accedemos al campo `name` del rol
+    userProfileDto.role = user.role.name;
 
     if (user.role.name === 'CUSTOMER' && user.customers) {
       userProfileDto.firstName = user.customers.firstName;
       userProfileDto.lastName = user.customers.lastName;
       userProfileDto.shippingAddress = user.customers.shippingAddress;
-
     } else if (user.role.name === 'AUTHOR' && user.authors) {
       userProfileDto.firstName = user.authors.firstName;
       userProfileDto.lastName = user.authors.lastName;
@@ -52,11 +49,10 @@ export class UserService {
     return userProfileDto;
   }
 
-
   async registerCustomer(createCustomerDto: CreateUserDto) {
     const newUser = await this.createUserWithRole(createCustomerDto.email, createCustomerDto.password, 'CUSTOMER');
 
-    const newCustomer = await this.prismaService.customer.create({
+    await this.prismaService.customer.create({
       data: {
         userId: newUser.id,
         firstName: createCustomerDto.firstName,
@@ -79,7 +75,7 @@ export class UserService {
   async registerAuthor(createAuthorDto: CreateUserDto) {
     const newUser = await this.createUserWithRole(createAuthorDto.email, createAuthorDto.password, 'AUTHOR');
 
-    const newAuthor = await this.prismaService.author.create({
+    await this.prismaService.author.create({
       data: {
         userId: newUser.id,
         firstName: createAuthorDto.firstName,
@@ -99,7 +95,6 @@ export class UserService {
     return this.buildResponse(userWithRole);
   }
 
-
   async findAll(): Promise<UserProfileDto[]> {
     const users = await this.prismaService.user.findMany({
       include: {
@@ -109,7 +104,7 @@ export class UserService {
       },
     });
 
-    return await Promise.all(users.map(user => this.buildResponse(user)));
+    return Promise.all(users.map(user => this.buildResponse(user)));
   }
 
   async findOne(id: number): Promise<UserProfileDto> {
@@ -129,7 +124,6 @@ export class UserService {
     return this.buildResponse(userFound);
   }
 
-
   async update(id: number, updateUserDto: UpdateUserDto) {
     const userToUpdate = await this.prismaService.user.findUnique({
       where: { id },
@@ -139,57 +133,64 @@ export class UserService {
         customers: true,
       },
     });
-  
+
     if (!userToUpdate) {
       throw new NotFoundException(`User with id ${id} not found`);
     }
-  
-    const updatedUser = await this.prismaService.user.update({
-      where: { id },
-      data: {
-        email: updateUserDto.email,
-        password: updateUserDto.password,
-        customers: updateUserDto.shippingAddress || updateUserDto.firstName || updateUserDto.lastName ? {
-          update: {
-            firstName: updateUserDto.firstName,
-            lastName: updateUserDto.lastName,
-            shippingAddress: updateUserDto.shippingAddress,
-            updatedAt: new Date(), 
-          },
-        } : undefined,
-  
-        authors: updateUserDto.bio || updateUserDto.firstName || updateUserDto.lastName ? (userToUpdate.authors ? {
+
+    const updateData: any = {
+      email: updateUserDto.email,
+      password: updateUserDto.password,
+    };
+
+    if (updateUserDto.shippingAddress || updateUserDto.firstName || updateUserDto.lastName) {
+      updateData.customers = {
+        update: {
+          firstName: updateUserDto.firstName,
+          lastName: updateUserDto.lastName,
+          shippingAddress: updateUserDto.shippingAddress,
+          updatedAt: new Date(),
+        },
+      };
+    }
+
+    if (updateUserDto.bio || updateUserDto.firstName || updateUserDto.lastName) {
+      if (userToUpdate.authors) {
+        updateData.authors = {
           update: {
             firstName: updateUserDto.firstName,
             lastName: updateUserDto.lastName,
             bio: updateUserDto.bio,
-            updatedAt: new Date(), 
+            updatedAt: new Date(),
           },
-        } : undefined) : undefined,
-      },
+        };
+      }
+    }
+
+    const updatedUser = await this.prismaService.user.update({
+      where: { id },
+      data: updateData,
       include: {
         role: true,
         authors: true,
         customers: true,
       },
     });
-  
+
     return this.buildResponse(updatedUser);
   }
-  
-  
-  
+
   async remove(id: number) {
-  const userToDelete = await this.prismaService.user.findUnique({
-    where: { id },
-  });
+    const userToDelete = await this.prismaService.user.findUnique({
+      where: { id },
+    });
 
-  if (!userToDelete) {
-    throw new NotFoundException(`User with id ${id} not found`);
+    if (!userToDelete) {
+      throw new NotFoundException(`User with id ${id} not found`);
+    }
+
+    return this.prismaService.user.delete({
+      where: { id },
+    });
   }
-
-  return await this.prismaService.user.delete({
-    where: { id },
-  });
-}
 }
