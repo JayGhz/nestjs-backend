@@ -1,26 +1,52 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { User } from './entities/user.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class UsersService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+
+  constructor(@InjectRepository(User) private usersRepository: Repository<User>,) { }
+
+  async create(createUserDto: CreateUserDto): Promise<User> {
+    const userExists = await this.usersRepository.findOneBy({ email: createUserDto.email });
+    if (userExists) {
+      throw new BadRequestException('User already exists');
+    }
+    const user = this.usersRepository.create(createUserDto);
+    return await this.usersRepository.save(user);
   }
 
-  findAll() {
-    return `This action returns all users`;
+  async findAll() {
+    return await this.usersRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: number) {
+    const userExists = await this.usersRepository.findOneBy({ id });
+    if (!userExists) {
+      throw new NotFoundException(`Does not exist a user with id: ${id}`);
+    }
+
+    return userExists;
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    const userExists = await this.usersRepository.findOneBy({ id });
+    if (!userExists) {
+      throw new NotFoundException(`Does not exist a user with id: ${id}`);
+    }
+
+    return await this.usersRepository.update({ id }, updateUserDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: number) {
+    const userExists = await this.usersRepository.findOneBy({ id });
+    if (!userExists) {
+      throw new NotFoundException(`Does not exist a user with id: ${id}`);
+    }
+
+    return await this.usersRepository.delete({ id });
   }
 }
