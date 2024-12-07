@@ -20,14 +20,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       autoLoadEntities: true,
       synchronize: true,
     }),
-    UsersModule, 
-    AuthModule, 
-    CustomersModule, 
-    VetsModule, 
+    UsersModule,
+    AuthModule,
+    CustomersModule,
+    VetsModule,
     SheltersModule,
   ],
 
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule { }
