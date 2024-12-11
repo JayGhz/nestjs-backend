@@ -5,7 +5,7 @@ import { UpdateShelterDto } from './dto/update-shelter.dto';
 
 @Controller('shelters')
 export class SheltersController {
-  constructor(private readonly sheltersService: SheltersService) {}
+  constructor(private readonly sheltersService: SheltersService) { }
 
   @Post()
   create(@Body() createShelterDto: CreateShelterDto) {
