@@ -23,4 +23,6 @@ export class CreateVetDto {
     @IsNotEmpty({ message: 'License number is required' })
     licensNumber: string;
 
+    userId: number;
+
 }

@@ -10,23 +10,43 @@ export class SheltersService {
 
   constructor(@InjectRepository(Shelter) private sheltersRepository: Repository<Shelter>,) { }
 
-  create(createShelterDto: CreateShelterDto) {
-    return 'This action adds a new shelter';
+  async create(createShelterDto: CreateShelterDto): Promise<Shelter> {
+    const shelterExists = await this.sheltersRepository.findOneBy({ ruc: createShelterDto.ruc });
+    if (shelterExists) {
+      throw new Error('Shelter with this RUC already exists');
+    }
+    const shelter = this.sheltersRepository.create(createShelterDto);
+    return this.sheltersRepository.save(shelter);
   }
 
-  findAll() {
-    return `This action returns all shelters`;
+  async findAll() {
+    return await this.sheltersRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} shelter`;
+  async findOne(id: number): Promise<Shelter> {
+    const shelterExists = await this.sheltersRepository.findOneBy({ id });
+    if (!shelterExists) {
+      throw new Error(`Does not exist a shelter with id: ${id}`);
+    }
+
+    return shelterExists;
   }
 
-  update(id: number, updateShelterDto: UpdateShelterDto) {
-    return `This action updates a #${id} shelter`;
+  async update(id: number, updateShelterDto: UpdateShelterDto) {
+    const shelterExists = await this.sheltersRepository.findOneBy({ id });
+    if (!shelterExists) {
+      throw new Error(`Does not exist a shelter with id: ${id}`);
+    }
+
+    return await this.sheltersRepository.update({ id }, updateShelterDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} shelter`;
+  async remove(id: number) {
+    const shelterExists = await this.sheltersRepository.findOneBy({ id });
+    if (!shelterExists) {
+      throw new Error(`Does not exist a shelter with id: ${id}`);
+    }
+
+    return await this.sheltersRepository.delete({ id });
   }
 }

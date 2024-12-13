@@ -2,7 +2,7 @@ import { Customer } from "src/customers/entities/customer.entity";
 import { Role } from "src/shared/enums/role.enum";
 import { Shelter } from "src/shelters/entities/shelter.entity";
 import { Vet } from "src/vets/entities/vet.entity";
-import { Column, Entity, OneToOne } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToOne, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class User {
@@ -21,10 +21,10 @@ export class User {
     @Column()
     password: string;
 
-    @Column()
+    @CreateDateColumn()
     createdAt: Date;
 
-    @Column()
+    @UpdateDateColumn()
     updatedAt: Date;
 
     @OneToOne(() => Customer, (customer) => customer.user, { cascade: true, onDelete: 'CASCADE' })

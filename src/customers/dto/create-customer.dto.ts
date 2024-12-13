@@ -14,4 +14,6 @@ export class CreateCustomerDto {
 
     @IsNotEmpty({ message: 'Address is required' })
     address: string;
+
+    userId: number;
 }

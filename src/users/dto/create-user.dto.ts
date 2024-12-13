@@ -1,7 +1,6 @@
 import { Type } from "class-transformer";
 import { IsEmail, IsEnum, IsNotEmpty, IsOptional, MinLength, ValidateNested } from "class-validator";
 import { CreateCustomerDto } from "src/customers/dto/create-customer.dto";
-import { Role } from "src/shared/enums/role.enum";
 import { CreateShelterDto } from "src/shelters/dto/create-shelter.dto";
 import { CreateVetDto } from "src/vets/dto/create-vet.dto";
 

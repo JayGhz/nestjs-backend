@@ -15,4 +15,7 @@ export class CreateShelterDto {
     @IsNotEmpty({ message: 'RUC is required' })
     @MinLength(11, { message: 'RUC must be 11 characters long' })
     ruc: string;
+
+    userId: number;
+
 }
