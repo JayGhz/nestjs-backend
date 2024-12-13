@@ -1,4 +1,5 @@
 import { Customer } from "src/customers/entities/customer.entity";
+import { Role } from "src/shared/enums/role.enum";
 import { Shelter } from "src/shelters/entities/shelter.entity";
 import { Vet } from "src/vets/entities/vet.entity";
 import { Column, Entity, OneToOne } from "typeorm";
@@ -13,16 +14,25 @@ export class User {
 
     @Column()
     email: string;
-
+    
+    @Column({type: 'enum', enum: Role})
+    role: Role;
+    
     @Column()
     password: string;
 
-    @OneToOne(() => Customer, (customer) => customer.user, { cascade: true })
-    customer: Customer;
+    @Column()
+    createdAt: Date;
 
-    @OneToOne(() => Vet, (Vet) => Vet.user, { cascade: true })
-    vet: Vet;
+    @Column()
+    updatedAt: Date;
 
-    @OneToOne(() => Shelter, (Shelter) => Shelter.user, { cascade: true })
-    shelter: Shelter;
+    @OneToOne(() => Customer, (customer) => customer.user, { cascade: true, onDelete: 'CASCADE' })
+    customer?: Customer;
+
+    @OneToOne(() => Vet, (Vet) => Vet.user, { cascade: true, onDelete: 'CASCADE' })
+    vet?: Vet;
+
+    @OneToOne(() => Shelter, (Shelter) => Shelter.user, { cascade: true, onDelete: 'CASCADE' })
+    shelter?: Shelter;
 }

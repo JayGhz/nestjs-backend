@@ -1,5 +1,5 @@
 import { User } from "src/users/entities/user.entity";
-import { Entity, OneToOne } from "typeorm";
+import { Entity, JoinColumn, OneToOne } from "typeorm";
 import { Column, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
@@ -8,14 +8,18 @@ export class Shelter {
     id: number;
 
     @Column()
-    name: string;
+    shelterName: string;
 
     @Column()
     location: string;
 
     @Column()
-    capacity: number;
+    capacityAnimals: number;
+
+    @Column()
+    ruc: string;
 
     @OneToOne(() => User, (user) => user.shelter)
+    @JoinColumn()
     user: User;
 }

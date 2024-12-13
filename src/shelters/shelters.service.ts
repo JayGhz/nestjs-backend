@@ -1,9 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { CreateShelterDto } from './dto/create-shelter.dto';
 import { UpdateShelterDto } from './dto/update-shelter.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Shelter } from './entities/shelter.entity';
 
 @Injectable()
 export class SheltersService {
+
+  constructor(@InjectRepository(Shelter) private sheltersRepository: Repository<Shelter>,) { }
+
   create(createShelterDto: CreateShelterDto) {
     return 'This action adds a new shelter';
   }

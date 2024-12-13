@@ -1,5 +1,6 @@
+import { Especialty } from "src/shared/enums/especialty.enum";
 import { User } from "src/users/entities/user.entity";
-import { Column, Entity, OneToOne } from "typeorm";
+import { Column, Entity, JoinColumn, OneToOne } from "typeorm";
 
 @Entity()
 export class Vet {
@@ -14,7 +15,17 @@ export class Vet {
 
     @Column()
     phoneNumber: string;
+    
+    @Column()
+    institution: string;
+    
+    @Column({type: 'enum', enum: Especialty})
+    especialty: Especialty;
+    
+    @Column()
+    licensNumber: string;
 
-    @OneToOne(() => User, (user) => user.customer)
+    @OneToOne(() => User, (user) => user.vet)
+    @JoinColumn()
     user: User;
 }
