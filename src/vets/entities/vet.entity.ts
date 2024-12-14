@@ -15,14 +15,14 @@ export class Vet {
 
     @Column()
     phoneNumber: string;
-    
+
     @Column()
     institution: string;
-    
-    @Column({type: 'enum', enum: Especialty})
+
+    @Column({ type: 'enum', enum: Especialty })
     especialty: Especialty;
-    
-    @Column()
+
+    @Column({ unique: true })
     licensNumber: string;
 
     @OneToOne(() => User, (user) => user.vet)

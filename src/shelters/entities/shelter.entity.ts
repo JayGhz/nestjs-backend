@@ -16,7 +16,7 @@ export class Shelter {
     @Column()
     capacityAnimals: number;
 
-    @Column()
+    @Column({ unique: true })
     ruc: string;
 
     @OneToOne(() => User, (user) => user.shelter)

@@ -12,12 +12,12 @@ export class User {
     @Column()
     userName: string;
 
-    @Column()
+    @Column({ unique: true })
     email: string;
-    
-    @Column({type: 'enum', enum: Role})
+
+    @Column({ type: 'enum', enum: Role })
     role: Role;
-    
+
     @Column()
     password: string;
 
