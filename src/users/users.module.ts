@@ -11,6 +11,7 @@ import { VetsModule } from 'src/vets/vets.module';
   controllers: [UsersController],
   providers: [UsersService],
   imports: [TypeOrmModule.forFeature([User]), CustomersModule, SheltersModule, VetsModule],
+  exports: [UsersService]
 
 })
 export class UsersModule { }

@@ -1,26 +1,57 @@
-import { Injectable } from '@nestjs/common';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { PasswordService } from 'src/shared/password/password.service';
+import { CreateUserDto } from 'src/users/dto/create-user.dto';
+import { User } from 'src/users/entities/user.entity';
+import { UsersService } from 'src/users/users.service';
+import { SignInDto } from './dto/sign-in.dto';
+import { JwtService } from '@nestjs/jwt';
+
 
 @Injectable()
 export class AuthService {
-  create(createAuthDto: CreateAuthDto) {
-    return 'This action adds a new auth';
+
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly passwordService: PasswordService,
+    private readonly jwtService: JwtService,
+  ) { }
+
+  async signIn(signInDto: SignInDto): Promise<{accessToken: string}> {
+
+    const { email, password } = signInDto;
+    const user = await this.usersService.findOneByEmail(email);
+
+    if (!user) {
+      throw new UnauthorizedException('Invalid credentials');
+    }
+
+    const isPasswordValid = await this.passwordService.comparePassword(password, user.password);
+    if (!isPasswordValid) {
+      throw new UnauthorizedException('Invalid credentials');
+    }
+
+    const payload = { email: user.email, sub: user.id };
+    const accessToken = await this.jwtService.signAsync(payload);
+
+    return { accessToken };
   }
 
-  findAll() {
-    return `This action returns all auth`;
+
+  async registerCustomer(createUserDto: CreateUserDto): Promise<User> {
+    const hashedPassword = await this.passwordService.hashPassword(createUserDto.password);
+    createUserDto.password = hashedPassword;
+    return await this.usersService.registerCustomer(createUserDto);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} auth`;
+  async registerVet(createUserDto: CreateUserDto): Promise<User> {
+    const hashedPassword = await this.passwordService.hashPassword(createUserDto.password);
+    createUserDto.password = hashedPassword;
+    return await this.usersService.registerVet(createUserDto);
   }
 
-  update(id: number, updateAuthDto: UpdateAuthDto) {
-    return `This action updates a #${id} auth`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} auth`;
+  async registerShelter(createUserDto: CreateUserDto): Promise<User> {
+    const hashedPassword = await this.passwordService.hashPassword(createUserDto.password);
+    createUserDto.password = hashedPassword;
+    return await this.usersService.registerShelter(createUserDto);
   }
 }
