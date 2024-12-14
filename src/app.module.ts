@@ -6,6 +6,7 @@ import { VetsModule } from './vets/vets.module';
 import { SheltersModule } from './shelters/shelters.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { SharedModule } from './shared/shared.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     CustomersModule,
     VetsModule,
     SheltersModule,
+    SharedModule,
   ],
 
   controllers: [],

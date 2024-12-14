@@ -8,9 +8,7 @@ import { Role } from 'src/shared/enums/role.enum';
 import { CustomersService } from 'src/customers/customers.service';
 import { VetsService } from 'src/vets/vets.service';
 import { SheltersService } from 'src/shelters/shelters.service';
-import { CreateCustomerDto } from 'src/customers/dto/create-customer.dto';
-import { CreateVetDto } from 'src/vets/dto/create-vet.dto';
-import { CreateShelterDto } from 'src/shelters/dto/create-shelter.dto';
+
 
 @Injectable()
 export class UsersService {
@@ -90,6 +88,11 @@ export class UsersService {
     }
 
     return await this.usersRepository.remove(userExists);
+  }
+
+  async findOneByEmail(email: string): Promise<User> {
+    const user = await this.usersRepository.findOneBy({ email });
+    return user;
   }
 
 }
