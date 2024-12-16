@@ -16,7 +16,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) { }
 
-  async signIn(signInDto: SignInDto): Promise<{accessToken: string}> {
+  async signIn(signInDto: SignInDto): Promise<{ accessToken: string }> {
 
     const { email, password } = signInDto;
     const user = await this.usersService.findOneByEmail(email);
@@ -53,5 +53,9 @@ export class AuthService {
     const hashedPassword = await this.passwordService.hashPassword(createUserDto.password);
     createUserDto.password = hashedPassword;
     return await this.usersService.registerShelter(createUserDto);
+  }
+
+  async getProfile({ email }: { email: string }) {
+    return await this.usersService.findOneByEmail(email);
   }
 }
