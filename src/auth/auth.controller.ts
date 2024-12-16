@@ -1,9 +1,9 @@
-import { Controller, Post, Body, UseGuards, Get, Req } from '@nestjs/common';
+import { Controller, Post, Body, Get, Req } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { User } from 'src/users/entities/user.entity';
 import { SignInDto } from './dto/sign-in.dto';
-import { Auth } from './decorators/auth.decorator';
+import { Auth } from '../shared/decorators/auth.decorator';
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) { }
