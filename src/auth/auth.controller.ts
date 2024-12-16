@@ -3,10 +3,7 @@ import { AuthService } from './auth.service';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { User } from 'src/users/entities/user.entity';
 import { SignInDto } from './dto/sign-in.dto';
-import { AuthGuard } from './guards/auth.guard';
-import { Roles } from './decorators/role.decorator';
-import { Role } from 'src/shared/enums/role.enum';
-import { RoleGuard } from './guards/role.guard';
+import { Auth } from './decorators/auth.decorator';
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) { }
@@ -32,8 +29,7 @@ export class AuthController {
   }
 
   @Get('profile')
-  @Roles(Role.ADMIN)
-  @UseGuards(AuthGuard, RoleGuard)
+  @Auth()
   getProfile(@Req() req) {
     return this.authService.getProfile(req.user);
   }
