@@ -8,6 +8,11 @@ import { Role } from 'src/shared/enums/role.enum';
 import { CustomersService } from 'src/customers/customers.service';
 import { VetsService } from 'src/vets/vets.service';
 import { SheltersService } from 'src/shelters/shelters.service';
+import { userProfileDto } from './dto/user-profile.dto';
+import { plainToInstance } from 'class-transformer';
+import { CustomerDetailsDto } from 'src/customers/dto/customer-details.dto';
+import { VetDetailsDto } from 'src/vets/dto/vet-details.dto';
+import { ShelterDetailsDto } from 'src/shelters/dto/shelter-details.dto';
 
 
 @Injectable()
@@ -30,19 +35,16 @@ export class UsersService {
     return await this.usersRepository.save(user);
   }
 
-  // Registrar un nuevo Customer 
   async registerCustomer(createUserDto: CreateUserDto): Promise<User> {
     const user = await this.create(createUserDto, Role.CUSTOMER);
     return user;
   }
 
-  // Registrar un nuevo Vet 
   async registerVet(createUserDto: CreateUserDto): Promise<User> {
     const user = await this.create(createUserDto, Role.VET);
     return user;
   }
 
-  // Registrar un nuevo Shelter 
   async registerShelter(createUserDto: CreateUserDto): Promise<User> {
     const user = await this.create(createUserDto, Role.SHELTER);
     return user;
@@ -90,9 +92,27 @@ export class UsersService {
     return await this.usersRepository.remove(userExists);
   }
 
-  async findOneByEmail(email: string): Promise<User> {
+  async findByEmail(email: string): Promise<User> {
     const user = await this.usersRepository.findOneBy({ email });
     return user;
   }
 
+  async getProfile(email: string): Promise<userProfileDto> {
+    const user = await this.usersRepository.findOne({
+      where: { email },
+      relations: ['customer', 'vet', 'shelter'], 
+    });
+  
+    if (!user) throw new NotFoundException('User with this email does not exist');
+  
+    return plainToInstance(userProfileDto, {
+      userName: user.userName,
+      email: user.email,
+      role: user.role,
+      customerDetails: user.customer ? plainToInstance(CustomerDetailsDto, user.customer) : undefined,
+      vetDetails: user.vet ? plainToInstance(VetDetailsDto, user.vet) : undefined,
+      shelterDetails: user.shelter ? plainToInstance(ShelterDetailsDto, user.shelter) : undefined,
+    });
+  }
+  
 }
