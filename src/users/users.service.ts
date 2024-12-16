@@ -13,6 +13,7 @@ import { plainToInstance } from 'class-transformer';
 import { CustomerDetailsDto } from 'src/customers/dto/customer-details.dto';
 import { VetDetailsDto } from 'src/vets/dto/vet-details.dto';
 import { ShelterDetailsDto } from 'src/shelters/dto/shelter-details.dto';
+import { UserDto } from './dto/user.dto';
 
 
 @Injectable()
@@ -50,17 +51,18 @@ export class UsersService {
     return user;
   }
 
-  async findAll() {
-    return await this.usersRepository.find();
+  async findAll(): Promise<UserDto[]> {
+    const users = await this.usersRepository.find();
+    return plainToInstance(UserDto, users, { excludeExtraneousValues: true });
   }
 
-  async findOne(id: number): Promise<User> {
+  async findOne(id: number): Promise<UserDto> {
     const userExists = await this.usersRepository.findOneBy({ id });
     if (!userExists) {
       throw new NotFoundException(`Does not exist a user with id: ${id}`);
     }
 
-    return userExists;
+    return plainToInstance(UserDto, userExists, { excludeExtraneousValues: true });
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
