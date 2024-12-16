@@ -4,6 +4,8 @@ import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { User } from 'src/users/entities/user.entity';
 import { SignInDto } from './dto/sign-in.dto';
 import { Auth } from '../shared/decorators/auth.decorator';
+import { userProfileDto } from 'src/users/dto/user-profile.dto';
+import { Role } from 'src/shared/enums/role.enum';
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) { }
@@ -30,7 +32,8 @@ export class AuthController {
 
   @Get('profile')
   @Auth()
-  getProfile(@Req() req) {
-    return this.authService.getProfile(req.user);
+  getProfile(@Req() req): Promise<userProfileDto> {
+    const { email } = req.user.email;
+    return this.authService.getProfile(email);
   }
 }

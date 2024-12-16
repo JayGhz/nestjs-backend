@@ -1,3 +1,4 @@
+import { Exclude } from "class-transformer";
 import { Customer } from "src/customers/entities/customer.entity";
 import { Role } from "src/shared/enums/role.enum";
 import { Shelter } from "src/shelters/entities/shelter.entity";

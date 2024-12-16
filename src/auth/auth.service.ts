@@ -5,6 +5,7 @@ import { User } from 'src/users/entities/user.entity';
 import { UsersService } from 'src/users/users.service';
 import { SignInDto } from './dto/sign-in.dto';
 import { JwtService } from '@nestjs/jwt';
+import { userProfileDto } from 'src/users/dto/user-profile.dto';
 
 
 @Injectable()
@@ -19,7 +20,7 @@ export class AuthService {
   async signIn(signInDto: SignInDto): Promise<{ accessToken: string }> {
 
     const { email, password } = signInDto;
-    const user = await this.usersService.findOneByEmail(email);
+    const user = await this.usersService.findByEmail(email);
 
     if (!user) {
       throw new UnauthorizedException('Invalid credentials');
@@ -55,7 +56,8 @@ export class AuthService {
     return await this.usersService.registerShelter(createUserDto);
   }
 
-  async getProfile({ email }: { email: string }) {
-    return await this.usersService.findOneByEmail(email);
+  async getProfile(email: string): Promise<userProfileDto> {
+    return await this.usersService.getProfile(email);
   }
+
 }
