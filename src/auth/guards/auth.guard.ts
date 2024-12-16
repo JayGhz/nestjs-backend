@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
 
     const token = this.extractTokenFromHeader(request);
     if (!token) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException('Token is invalid or expired');
     }
 
     try {
@@ -23,8 +23,8 @@ export class AuthGuard implements CanActivate {
         secret: jwtConstants.secret,
       });
       request['user'] = payload;
-    } catch (err) {
-      return false;
+    } catch {
+      throw new UnauthorizedException('Token is invalid or expired');
     }
 
     return true;
