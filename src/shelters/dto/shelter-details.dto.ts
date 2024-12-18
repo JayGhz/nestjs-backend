@@ -1,7 +1,15 @@
+import { Expose } from "class-transformer";
+
 export class ShelterDetailsDto {
-    shelterName: string;
-    location: string;
-    capacityAnimals: number;
-    ruc: string
-  }
+  @Expose()
+  shelterName: string;
+
+  @Expose()
+  location: string;
   
+  @Expose()
+  capacityAnimals: number;
+
+  @Expose()
+  ruc: string
+}

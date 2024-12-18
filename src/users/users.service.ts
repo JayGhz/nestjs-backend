@@ -36,19 +36,33 @@ export class UsersService {
     return await this.usersRepository.save(user);
   }
 
-  async registerCustomer(createUserDto: CreateUserDto): Promise<User> {
+  async registerCustomer(createUserDto: CreateUserDto): Promise<userProfileDto> {
     const user = await this.create(createUserDto, Role.CUSTOMER);
-    return user;
+    return plainToInstance(userProfileDto, {
+      userName: user.userName,
+      email: user.email,
+      role: user.role,
+      customerDetails: plainToInstance(CustomerDetailsDto, user.customer),
+    });
   }
-
-  async registerVet(createUserDto: CreateUserDto): Promise<User> {
+  async registerVet(createUserDto: CreateUserDto): Promise<userProfileDto> {
     const user = await this.create(createUserDto, Role.VET);
-    return user;
+    return plainToInstance(userProfileDto, {
+      userName: user.userName,
+      email: user.email,
+      role: user.role,
+      vetDetails: plainToInstance(VetDetailsDto, user.vet),
+    });
   }
 
-  async registerShelter(createUserDto: CreateUserDto): Promise<User> {
+  async registerShelter(createUserDto: CreateUserDto): Promise<userProfileDto> {
     const user = await this.create(createUserDto, Role.SHELTER);
-    return user;
+    return plainToInstance(userProfileDto, {
+      userName: user.userName,
+      email: user.email,
+      role: user.role,
+      shelterDetails: plainToInstance(ShelterDetailsDto, user.shelter),
+    });
   }
 
   async findAll(): Promise<UserDto[]> {
@@ -71,7 +85,9 @@ export class UsersService {
       throw new NotFoundException(`Does not exist a user with id: ${id}`);
     }
 
-    return await this.usersRepository.update({ id }, updateUserDto);
+    await this.usersRepository.update({ id }, updateUserDto);
+    
+    return { message: 'User updated successfully' };
   }
 
   async remove(id: number) {
@@ -91,7 +107,9 @@ export class UsersService {
       await this.shelterService.remove(userExists.shelter.id);
     }
 
-    return await this.usersRepository.remove(userExists);
+    await this.usersRepository.remove(userExists);
+
+    return { message: 'User deleted successfully' };
   }
 
   async findByEmail(email: string): Promise<User> {
@@ -102,11 +120,11 @@ export class UsersService {
   async getProfile(email: string): Promise<userProfileDto> {
     const user = await this.usersRepository.findOne({
       where: { email },
-      relations: ['customer', 'vet', 'shelter'], 
+      relations: ['customer', 'vet', 'shelter'],
     });
-  
+
     if (!user) throw new NotFoundException('User with this email does not exist');
-  
+
     return plainToInstance(userProfileDto, {
       userName: user.userName,
       email: user.email,
@@ -116,5 +134,5 @@ export class UsersService {
       shelterDetails: user.shelter ? plainToInstance(ShelterDetailsDto, user.shelter) : undefined,
     });
   }
-  
+
 }

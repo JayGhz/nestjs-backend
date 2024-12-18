@@ -1,11 +1,10 @@
 import { Controller, Post, Body, Get, Req } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
-import { User } from 'src/users/entities/user.entity';
 import { SignInDto } from './dto/sign-in.dto';
 import { Auth } from '../shared/decorators/auth.decorator';
 import { userProfileDto } from 'src/users/dto/user-profile.dto';
-import { Role } from 'src/shared/enums/role.enum';
+
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) { }
@@ -16,23 +15,23 @@ export class AuthController {
   }
 
   @Post('register-customer')
-  registerCustomer(@Body() createUserDto: CreateUserDto): Promise<User> {
+  registerCustomer(@Body() createUserDto: CreateUserDto) {
     return this.authService.registerCustomer(createUserDto);
   }
 
   @Post('register-vet')
-  registerVet(@Body() createUserDto: CreateUserDto): Promise<User> {
+  registerVet(@Body() createUserDto: CreateUserDto) {
     return this.authService.registerVet(createUserDto);
   }
 
   @Post('register-shelter')
-  registerShelter(@Body() createUserDto: CreateUserDto): Promise<User> {
+  registerShelter(@Body() createUserDto: CreateUserDto) {
     return this.authService.registerShelter(createUserDto);
   }
 
   @Get('profile')
   @Auth()
-  getProfile(@Req() req): Promise<userProfileDto> {
+  getProfile(@Req() req) {
     const { email } = req.user.email;
     return this.authService.getProfile(email);
   }
