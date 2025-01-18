@@ -18,6 +18,10 @@ export class RoleGuard implements CanActivate {
       throw new UnauthorizedException('User not authenticated');
     }
 
+    if (user.rp === Role.ADMIN) {
+      return true;
+    }
+
     const hasRole = requiredRoles.some((role) => user.role === role);
     if (!hasRole) {
       throw new UnauthorizedException('This user is not authorized to access this resource');
