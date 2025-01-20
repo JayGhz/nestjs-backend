@@ -4,7 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
-import { Role } from 'src/shared/enums/role.enum';
+import { Role } from 'src/common/enums/role.enum';
 import { CustomersService } from 'src/customers/customers.service';
 import { VetsService } from 'src/vets/vets.service';
 import { SheltersService } from 'src/shelters/shelters.service';

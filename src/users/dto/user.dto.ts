@@ -1,5 +1,5 @@
 import { Expose } from "class-transformer";
-import { Role } from "src/shared/enums/role.enum";
+import { Role } from "src/common/enums/role.enum";
 
 export class UserDto {
     @Expose()

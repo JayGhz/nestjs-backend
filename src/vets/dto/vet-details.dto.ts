@@ -1,5 +1,5 @@
 import { Expose } from "class-transformer";
-import { Especialty } from "src/shared/enums/especialty.enum";
+import { Especialty } from "src/common/enums/especialty.enum";
 
 export class VetDetailsDto {
     @Expose()

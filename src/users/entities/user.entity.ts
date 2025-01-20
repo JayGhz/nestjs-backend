@@ -1,5 +1,5 @@
 import { Customer } from "src/customers/entities/customer.entity";
-import { Role } from "src/shared/enums/role.enum";
+import { Role } from "src/common/enums/role.enum";
 import { Shelter } from "src/shelters/entities/shelter.entity";
 import { Vet } from "src/vets/entities/vet.entity";
 import { Column, CreateDateColumn, Entity, OneToOne, UpdateDateColumn } from "typeorm";
