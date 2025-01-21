@@ -1,6 +1,6 @@
 import { Expose } from "class-transformer";
 import { CustomerDetailsDto } from "src/customers/dto/customer-details.dto";
-import { Role } from "src/common/enums/role.enum";
+import { Role } from "src/common/enums/user-role.enum";
 import { ShelterDetailsDto } from "src/shelters/dto/shelter-details.dto";
 import { VetDetailsDto } from "src/vets/dto/vet-details.dto";
 

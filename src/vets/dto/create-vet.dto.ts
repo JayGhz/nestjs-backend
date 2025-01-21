@@ -1,5 +1,5 @@
 import { IsEnum, IsNotEmpty, MinLength } from "class-validator";
-import { Especialty } from "src/common/enums/especialty.enum";
+import { Especialty } from "src/common/enums/vet-especialty.enum";
 
 export class CreateVetDto {
 

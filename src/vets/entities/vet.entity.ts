@@ -1,4 +1,4 @@
-import { Especialty } from "src/common/enums/especialty.enum";
+import { Especialty } from "src/common/enums/vet-especialty.enum";
 import { User } from "src/users/entities/user.entity";
 import { Column, Entity, JoinColumn, OneToOne } from "typeorm";
 
