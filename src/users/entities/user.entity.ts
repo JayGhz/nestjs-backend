@@ -1,8 +1,9 @@
-import { Customer } from "src/customers/entities/customer.entity";
-import { Role } from "src/common/enums/user-role.enum";
-import { Shelter } from "src/shelters/entities/shelter.entity";
-import { Vet } from "src/vets/entities/vet.entity";
-import { Column, CreateDateColumn, Entity, OneToOne, UpdateDateColumn } from "typeorm";
+import { Customer } from "../../customers/entities/customer.entity";
+import { Role } from "../../common/enums/user-role.enum";
+import { Shelter } from "../../shelters/entities/shelter.entity";
+import { Vet } from "../../vets/entities/vet.entity";
+import { Column, CreateDateColumn, Entity, OneToMany, OneToOne, UpdateDateColumn } from "typeorm";
+import { Pet } from "../../pets/entities/pet.entity";
 
 @Entity()
 export class User {
@@ -35,4 +36,7 @@ export class User {
 
     @OneToOne(() => Shelter, (Shelter) => Shelter.user, { cascade: true, onDelete: 'CASCADE' })
     shelter?: Shelter;
+
+    @OneToMany(() => Pet, pet => pet.user)
+    pets: Pet[];
 }

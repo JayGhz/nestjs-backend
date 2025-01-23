@@ -1,6 +1,7 @@
-import { Race } from "src/common/enums/pet-race.enum";
-import { Specie } from "src/common/enums/pet-specie.enum";
-import { Column, Entity } from "typeorm";
+import { User } from "../../users/entities/user.entity";
+import { Race } from "../../common/enums/pet-race.enum";
+import { Specie } from "../../common/enums/pet-specie.enum";
+import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
 
 @Entity()
 export class Pet {
@@ -18,5 +19,9 @@ export class Pet {
 
     @Column({ type: 'enum', enum: Specie })
     specie: Specie
+
+    @ManyToOne(() => User)
+    @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
+    user: User;
 
 }
