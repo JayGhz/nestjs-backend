@@ -8,7 +8,7 @@ import { Repository } from 'typeorm';
 @Injectable()
 export class VetsService {
 
-  constructor(@InjectRepository(Vet) private vetsRepository: Repository<Vet>,) { }
+  constructor(@InjectRepository(Vet) private vetsRepository: Repository<Vet>) { }
 
   async create(createVetDto: CreateVetDto): Promise<Vet> {
     const vetExists = await this.vetsRepository.findOneBy({ licensNumber: createVetDto.licensNumber });

@@ -1,26 +1,51 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateBreedDto } from './dto/create-breed.dto';
 import { UpdateBreedDto } from './dto/update-breed.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Breed } from './entities/breed.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class BreedsService {
-  create(createBreedDto: CreateBreedDto) {
-    return 'This action adds a new breed';
+
+  constructor(@InjectRepository(Breed) private breedsRepository: Repository<Breed>) { }
+
+  async create(createBreedDto: CreateBreedDto): Promise<Breed> {
+    const breedExists = await this.breedsRepository.findOneBy({ name: createBreedDto.name });
+    if (breedExists) {
+      throw new BadRequestException('Breed already exists');
+    }
+
+    const breed = this.breedsRepository.create(createBreedDto);
+    return await this.breedsRepository.save(breed);
   }
 
-  findAll() {
-    return `This action returns all breeds`;
+  async findAll(): Promise<Breed[]> {
+    return this.breedsRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} breed`;
+  async findOne(id: number): Promise<Breed> {
+    const breedExists = await this.breedsRepository.findOneBy({ id });
+    if (!breedExists) {
+      throw new BadRequestException(`Does not exist a breed with id: ${id}`);
+    }
+
+    return breedExists;
   }
 
-  update(id: number, updateBreedDto: UpdateBreedDto) {
-    return `This action updates a #${id} breed`;
+  async update(id: number, updateBreedDto: UpdateBreedDto) {
+    const breedExists = await this.breedsRepository.findOneBy({ id });
+    if (!breedExists) {
+      throw new BadRequestException(`Does not exist a breed with id: ${id}`);
+    }
+    return await this.breedsRepository.update({ id }, updateBreedDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} breed`;
+  async remove(id: number): Promise<void> {
+    const breedExists = await this.breedsRepository.findOneBy({ id });
+    if (!breedExists) {
+      throw new BadRequestException(`Does not exist a breed with id: ${id}`);
+    }
+    await this.breedsRepository.delete({ id });
   }
 }
