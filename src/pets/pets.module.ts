@@ -9,4 +9,4 @@ import { Pet } from './entities/pet.entity';
   providers: [PetsService],
   imports: [TypeOrmModule.forFeature([Pet])],
 })
-export class PetsModule {}
+export class PetsModule { }
