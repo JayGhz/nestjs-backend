@@ -1,5 +1,6 @@
+import { Pet } from 'src/pets/entities/pet.entity';
 import { Specie } from 'src/shared/enums/specie.enum';
-import { Entity, Column } from 'typeorm';
+import { Entity, Column, OneToMany } from 'typeorm';
 
 @Entity()
 export class Breed {
@@ -14,4 +15,7 @@ export class Breed {
 
     @Column({ type: 'enum', enum: Specie })
     species: Specie;
+
+    @OneToMany(() => Pet, pet => pet.breed)
+    pets: Pet[];
 }
