@@ -5,8 +5,8 @@ import { Repository } from 'typeorm';
 import { Pet } from './entities/pet.entity';
 import { Breed } from '../breeds/entities/breed.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from 'src/users/entities/user.entity';
-import { UserActiveInterface } from 'src/shared/interfaces/user-active.interface';
+import { User } from '../users/entities/user.entity';
+import { UserActiveInterface } from '../shared/interfaces/user-active.interface';
 
 @Injectable()
 export class PetsService {

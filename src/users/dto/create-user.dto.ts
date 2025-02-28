@@ -1,8 +1,8 @@
 import { Type } from "class-transformer";
 import { IsEmail, IsEnum, IsNotEmpty, IsOptional, MinLength, ValidateNested } from "class-validator";
-import { CreateCustomerDto } from "src/customers/dto/create-customer.dto";
-import { CreateShelterDto } from "src/shelters/dto/create-shelter.dto";
-import { CreateVetDto } from "src/vets/dto/create-vet.dto";
+import { CreateCustomerDto } from "../../customers/dto/create-customer.dto";
+import { CreateShelterDto } from "../../shelters/dto/create-shelter.dto";
+import { CreateVetDto } from "../../vets/dto/create-vet.dto";
 
 export class CreateUserDto {
 

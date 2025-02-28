@@ -3,7 +3,7 @@ import { VetsService } from './vets.service';
 import { VetsController } from './vets.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Vet } from './entities/vet.entity';
-import { AuthModule } from 'src/auth/auth.module';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
   controllers: [VetsController],

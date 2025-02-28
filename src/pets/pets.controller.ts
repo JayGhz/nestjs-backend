@@ -2,9 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { PetsService } from './pets.service';
 import { CreatePetDto } from './dto/create-pet.dto';
 import { UpdatePetDto } from './dto/update-pet.dto';
-import { UserActiveInterface } from 'src/shared/interfaces/user-active.interface';
-import { ActiveUser } from 'src/shared/decorators/active-user.decorator';
-import { Auth } from 'src/auth/decorators/auth.decorator';
+import { UserActiveInterface } from '../shared/interfaces/user-active.interface';
+import { ActiveUser } from '../shared/decorators/active-user.decorator';
+import { Auth } from '../auth/decorators/auth.decorator';
 
 
 @Auth()

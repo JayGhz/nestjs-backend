@@ -1,10 +1,10 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { PasswordService } from 'src/shared/password/password.service';
-import { CreateUserDto } from 'src/users/dto/create-user.dto';
-import { UsersService } from 'src/users/users.service';
+import { PasswordService } from '../shared/password/password.service';
+import { CreateUserDto } from '../users/dto/create-user.dto';
+import { UsersService } from '../users/users.service';
 import { SignInDto } from './dto/sign-in.dto';
 import { JwtService } from '@nestjs/jwt';
-import { userProfileDto } from 'src/users/dto/user-profile.dto';
+import { userProfileDto } from '../users/dto/user-profile.dto';
 
 
 @Injectable()
