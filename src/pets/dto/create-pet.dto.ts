@@ -6,4 +6,10 @@ export class CreatePetDto {
 
     @IsNotEmpty({ message: 'Breed  is required' })
     breedName: string;
+
+    @IsNotEmpty({ message: 'Age is required' })
+    age: number;
+
+    @IsNotEmpty({ message: 'Weight is required' })
+    weight: number;
 }

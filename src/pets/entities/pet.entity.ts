@@ -10,6 +10,12 @@ export class Pet {
     @Column()
     name: string;
 
+    @Column()
+    age: number;
+
+    @Column()
+    weight: number;
+
     @ManyToOne(() => User, user => user.pets)
     user: User;
 
