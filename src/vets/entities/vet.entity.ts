@@ -1,5 +1,5 @@
-import { Especialty } from "src/shared/enums/especialty.enum";
-import { User } from "src/users/entities/user.entity";
+import { Especialty } from "../../shared/enums/especialty.enum";
+import { User } from "../../users/entities/user.entity";
 import { Column, Entity, JoinColumn, OneToOne } from "typeorm";
 
 @Entity()

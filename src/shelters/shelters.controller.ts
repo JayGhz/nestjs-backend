@@ -2,8 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { SheltersService } from './shelters.service';
 import { CreateShelterDto } from './dto/create-shelter.dto';
 import { UpdateShelterDto } from './dto/update-shelter.dto';
-import { Role } from 'src/shared/enums/role.enum';
-import { Auth } from 'src/auth/decorators/auth.decorator';
+import { Role } from '../shared/enums/role.enum';
+import { Auth } from '../auth/decorators/auth.decorator';
 
 
 Auth(Role.ADMIN)

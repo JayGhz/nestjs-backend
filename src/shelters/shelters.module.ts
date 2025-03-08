@@ -3,7 +3,7 @@ import { SheltersService } from './shelters.service';
 import { SheltersController } from './shelters.controller';
 import { Shelter } from './entities/shelter.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AuthModule } from 'src/auth/auth.module';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
   controllers: [SheltersController],

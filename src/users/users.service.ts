@@ -4,15 +4,15 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
-import { Role } from 'src/shared/enums/role.enum';
-import { CustomersService } from 'src/customers/customers.service';
-import { VetsService } from 'src/vets/vets.service';
-import { SheltersService } from 'src/shelters/shelters.service';
+import { Role } from '../shared/enums/role.enum';
+import { CustomersService } from '../customers/customers.service';
+import { VetsService } from '../vets/vets.service';
+import { SheltersService } from '../shelters/shelters.service';
 import { userProfileDto } from './dto/user-profile.dto';
 import { plainToInstance } from 'class-transformer';
-import { CustomerDetailsDto } from 'src/customers/dto/customer-details.dto';
-import { VetDetailsDto } from 'src/vets/dto/vet-details.dto';
-import { ShelterDetailsDto } from 'src/shelters/dto/shelter-details.dto';
+import { CustomerDetailsDto } from '../customers/dto/customer-details.dto';
+import { VetDetailsDto } from '../vets/dto/vet-details.dto';
+import { ShelterDetailsDto } from '../shelters/dto/shelter-details.dto';
 import { UserDto } from './dto/user.dto';
 
 

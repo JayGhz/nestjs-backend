@@ -1,5 +1,5 @@
-import { Pet } from 'src/pets/entities/pet.entity';
-import { Specie } from 'src/shared/enums/specie.enum';
+import { Pet } from '../../pets/entities/pet.entity';
+import { Specie } from '../../shared/enums/specie.enum';
 import { Entity, Column, OneToMany } from 'typeorm';
 
 @Entity()

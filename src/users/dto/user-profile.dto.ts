@@ -1,8 +1,8 @@
 import { Expose } from "class-transformer";
-import { CustomerDetailsDto } from "src/customers/dto/customer-details.dto";
-import { Role } from "src/shared/enums/role.enum";
-import { ShelterDetailsDto } from "src/shelters/dto/shelter-details.dto";
-import { VetDetailsDto } from "src/vets/dto/vet-details.dto";
+import { CustomerDetailsDto } from "../../customers/dto/customer-details.dto";
+import { Role } from "../../shared/enums/role.enum";
+import { ShelterDetailsDto } from "../../shelters/dto/shelter-details.dto";
+import { VetDetailsDto } from "../../vets/dto/vet-details.dto";
 
 export class userProfileDto {
   @Expose()

@@ -1,7 +1,7 @@
-import { Customer } from "src/customers/entities/customer.entity";
-import { Role } from "src/shared/enums/role.enum";
-import { Shelter } from "src/shelters/entities/shelter.entity";
-import { Vet } from "src/vets/entities/vet.entity";
+import { Customer } from "../../customers/entities/customer.entity";
+import { Role } from "../../shared/enums/role.enum";
+import { Shelter } from "../../shelters/entities/shelter.entity";
+import { Vet } from "../../vets/entities/vet.entity";
 import { Column, CreateDateColumn, Entity, OneToOne, UpdateDateColumn, OneToMany } from "typeorm";
 import { Pet } from '../../pets/entities/pet.entity';
 

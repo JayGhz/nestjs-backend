@@ -2,8 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { CustomersService } from './customers.service';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
-import { Role } from 'src/shared/enums/role.enum';
-import { Auth } from 'src/auth/decorators/auth.decorator';
+import { Role } from '../shared/enums/role.enum';
+import { Auth } from '../auth/decorators/auth.decorator';
 
 @Auth(Role.ADMIN)
 @Controller('customers')

@@ -1,5 +1,5 @@
 import { IsNotEmpty } from "class-validator";
-import { Specie } from "src/shared/enums/specie.enum";
+import { Specie } from "../../shared/enums/specie.enum";
 
 export class CreateBreedDto {
 

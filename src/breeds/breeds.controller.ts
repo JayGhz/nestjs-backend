@@ -2,8 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { BreedsService } from './breeds.service';
 import { CreateBreedDto } from './dto/create-breed.dto';
 import { UpdateBreedDto } from './dto/update-breed.dto';
-import { Auth } from 'src/auth/decorators/auth.decorator';
-import { Role } from 'src/shared/enums/role.enum';
+import { Auth } from '../auth/decorators/auth.decorator';
+import { Role } from '../shared/enums/role.enum';
 
 @Auth(Role.ADMIN)
 @Controller('breeds')
