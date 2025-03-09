@@ -1,9 +1,10 @@
+import { Auth } from '@/auth/decorators/auth.decorator';
+import { BreedsService } from '@/breeds/breeds.service';
+import { CreateBreedDto } from '@/breeds/dto/create-breed.dto';
+import { UpdateBreedDto } from '@/breeds/dto/update-breed.dto';
+import { Role } from '@/shared/enums/role.enum';
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { BreedsService } from './breeds.service';
-import { CreateBreedDto } from './dto/create-breed.dto';
-import { UpdateBreedDto } from './dto/update-breed.dto';
-import { Auth } from '../auth/decorators/auth.decorator';
-import { Role } from '../shared/enums/role.enum';
+
 
 @Auth(Role.ADMIN)
 @Controller('breeds')

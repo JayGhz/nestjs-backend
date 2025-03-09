@@ -1,9 +1,10 @@
+import { AuthModule } from '@/auth/auth.module';
+import { Vet } from '@/vets/entities/vet.entity';
+import { VetsController } from '@/vets/vets.controller';
+import { VetsService } from '@/vets/vets.service';
 import { forwardRef, Module } from '@nestjs/common';
-import { VetsService } from './vets.service';
-import { VetsController } from './vets.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Vet } from './entities/vet.entity';
-import { AuthModule } from '../auth/auth.module';
+
 
 @Module({
   controllers: [VetsController],

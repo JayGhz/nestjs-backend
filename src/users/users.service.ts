@@ -1,19 +1,19 @@
+import { CustomersService } from '@/customers/customers.service';
+import { CustomerDetailsDto } from '@/customers/dto/customer-details.dto';
+import { Role } from '@/shared/enums/role.enum';
+import { ShelterDetailsDto } from '@/shelters/dto/shelter-details.dto';
+import { SheltersService } from '@/shelters/shelters.service';
+import { CreateUserDto } from '@/users/dto/create-user.dto';
+import { UpdateUserDto } from '@/users/dto/update-user.dto';
+import { userProfileDto } from '@/users/dto/user-profile.dto';
+import { UserDto } from '@/users/dto/user.dto';
+import { User } from '@/users/entities/user.entity';
+import { VetDetailsDto } from '@/vets/dto/vet-details.dto';
+import { VetsService } from '@/vets/vets.service';
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from './entities/user.entity';
-import { Repository } from 'typeorm';
-import { Role } from '../shared/enums/role.enum';
-import { CustomersService } from '../customers/customers.service';
-import { VetsService } from '../vets/vets.service';
-import { SheltersService } from '../shelters/shelters.service';
-import { userProfileDto } from './dto/user-profile.dto';
 import { plainToInstance } from 'class-transformer';
-import { CustomerDetailsDto } from '../customers/dto/customer-details.dto';
-import { VetDetailsDto } from '../vets/dto/vet-details.dto';
-import { ShelterDetailsDto } from '../shelters/dto/shelter-details.dto';
-import { UserDto } from './dto/user.dto';
+import { Repository } from 'typeorm';
 
 
 @Injectable()

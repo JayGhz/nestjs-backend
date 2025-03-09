@@ -1,6 +1,7 @@
+import { Breed } from '@/breeds/entities/breed.entity';
+import { User } from '@/users/entities/user.entity';
 import { Entity, Column, ManyToOne } from 'typeorm';
-import { User } from '../../users/entities/user.entity';
-import { Breed } from '../../breeds/entities/breed.entity';
+
 
 @Entity()
 export class Pet {

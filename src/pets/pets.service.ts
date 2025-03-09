@@ -1,12 +1,12 @@
+import { Breed } from '@/breeds/entities/breed.entity';
+import { CreatePetDto } from '@/pets/dto/create-pet.dto';
+import { UpdatePetDto } from '@/pets/dto/update-pet.dto';
+import { Pet } from '@/pets/entities/pet.entity';
+import { UserActiveInterface } from '@/shared/interfaces/user-active.interface';
+import { User } from '@/users/entities/user.entity';
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { CreatePetDto } from './dto/create-pet.dto';
-import { UpdatePetDto } from './dto/update-pet.dto';
-import { Repository } from 'typeorm';
-import { Pet } from './entities/pet.entity';
-import { Breed } from '../breeds/entities/breed.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from '../users/entities/user.entity';
-import { UserActiveInterface } from '../shared/interfaces/user-active.interface';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class PetsService {

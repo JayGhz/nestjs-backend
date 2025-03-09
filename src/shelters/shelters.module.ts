@@ -1,9 +1,10 @@
+import { AuthModule } from '@/auth/auth.module';
+import { Shelter } from '@/shelters/entities/shelter.entity';
+import { SheltersController } from '@/shelters/shelters.controller';
+import { SheltersService } from '@/shelters/shelters.service';
 import { forwardRef, Module } from '@nestjs/common';
-import { SheltersService } from './shelters.service';
-import { SheltersController } from './shelters.controller';
-import { Shelter } from './entities/shelter.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AuthModule } from '../auth/auth.module';
+
 
 @Module({
   controllers: [SheltersController],

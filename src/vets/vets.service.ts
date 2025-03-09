@@ -1,8 +1,9 @@
+import { CreateVetDto } from '@/vets/dto/create-vet.dto';
+import { UpdateVetDto } from '@/vets/dto/update-vet.dto';
+import { Vet } from '@/vets/entities/vet.entity';
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
-import { CreateVetDto } from './dto/create-vet.dto';
-import { UpdateVetDto } from './dto/update-vet.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Vet } from './entities/vet.entity';
+
 import { Repository } from 'typeorm';
 
 @Injectable()

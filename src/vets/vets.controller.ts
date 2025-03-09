@@ -1,9 +1,9 @@
+import { Auth } from '@/auth/decorators/auth.decorator';
+import { Role } from '@/shared/enums/role.enum';
+import { CreateVetDto } from '@/vets/dto/create-vet.dto';
+import { UpdateVetDto } from '@/vets/dto/update-vet.dto';
+import { VetsService } from '@/vets/vets.service';
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { VetsService } from './vets.service';
-import { CreateVetDto } from './dto/create-vet.dto';
-import { UpdateVetDto } from './dto/update-vet.dto';
-import { Role } from '../shared/enums/role.enum';
-import { Auth } from '../auth/decorators/auth.decorator';
 
 
 Auth(Role.ADMIN)

@@ -1,12 +1,12 @@
 import { forwardRef, Module } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { AuthController } from './auth.controller';
-import { UsersModule } from '../users/users.module';
-import { SharedModule } from '../shared/shared.module';
 import { JwtModule } from '@nestjs/jwt';
-import { jwtConstants } from './constants/jwt.constants';
-import { AuthGuard } from './guards/auth.guard';
-import { RoleGuard } from './guards/role.guard';
+import { jwtConstants } from '@/auth/constants/jwt.constants';
+import { RoleGuard } from '@/auth/guards/role.guard';
+import { AuthGuard } from '@/auth/guards/auth.guard';
+import { UsersModule } from '@/users/users.module';
+import { SharedModule } from '@/shared/shared.module';
+import { AuthController } from '@/auth/auth.controller';
+import { AuthService } from '@/auth/auth.service';
 
 @Module({
   controllers: [AuthController],

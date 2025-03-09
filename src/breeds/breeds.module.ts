@@ -1,9 +1,10 @@
+import { AuthModule } from '@/auth/auth.module';
+import { BreedsController } from '@/breeds/breeds.controller';
+import { BreedsService } from '@/breeds/breeds.service';
+import { Breed } from '@/breeds/entities/breed.entity';
 import { Module } from '@nestjs/common';
-import { BreedsService } from './breeds.service';
-import { BreedsController } from './breeds.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Breed } from './entities/breed.entity';
-import { AuthModule } from '../auth/auth.module';
+
 
 @Module({
   controllers: [BreedsController],

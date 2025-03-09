@@ -1,9 +1,9 @@
+import { Auth } from '@/auth/decorators/auth.decorator';
+import { CustomersService } from '@/customers/customers.service';
+import { CreateCustomerDto } from '@/customers/dto/create-customer.dto';
+import { UpdateCustomerDto } from '@/customers/dto/update-customer.dto';
+import { Role } from '@/shared/enums/role.enum';
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { CustomersService } from './customers.service';
-import { CreateCustomerDto } from './dto/create-customer.dto';
-import { UpdateCustomerDto } from './dto/update-customer.dto';
-import { Role } from '../shared/enums/role.enum';
-import { Auth } from '../auth/decorators/auth.decorator';
 
 @Auth(Role.ADMIN)
 @Controller('customers')

@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common';
-import { UsersModule } from './users/users.module';
-import { AuthModule } from './auth/auth.module';
-import { CustomersModule } from './customers/customers.module';
-import { VetsModule } from './vets/vets.module';
-import { SheltersModule } from './shelters/shelters.module';
+import { UsersModule } from '@/users/users.module';
+import { AuthModule } from '@/auth/auth.module';
+import { CustomersModule } from '@/customers/customers.module';
+import { VetsModule } from '@/vets/vets.module';
+import { SheltersModule } from '@/shelters/shelters.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { SharedModule } from './shared/shared.module';
-import { PetsModule } from './pets/pets.module';
-import { BreedsModule } from './breeds/breeds.module';
+import { SharedModule } from '@/shared/shared.module';
+import { PetsModule } from '@/pets/pets.module';
+import { BreedsModule } from '@/breeds/breeds.module';
 
 @Module({
   imports: [

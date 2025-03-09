@@ -1,8 +1,8 @@
+import { CreateBreedDto } from '@/breeds/dto/create-breed.dto';
+import { UpdateBreedDto } from '@/breeds/dto/update-breed.dto';
+import { Breed } from '@/breeds/entities/breed.entity';
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { CreateBreedDto } from './dto/create-breed.dto';
-import { UpdateBreedDto } from './dto/update-breed.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Breed } from './entities/breed.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()

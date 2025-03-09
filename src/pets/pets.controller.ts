@@ -1,10 +1,11 @@
+import { Auth } from '@/auth/decorators/auth.decorator';
+import { CreatePetDto } from '@/pets/dto/create-pet.dto';
+import { UpdatePetDto } from '@/pets/dto/update-pet.dto';
+import { PetsService } from '@/pets/pets.service';
+import { ActiveUser } from '@/shared/decorators/active-user.decorator';
+import { UserActiveInterface } from '@/shared/interfaces/user-active.interface';
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { PetsService } from './pets.service';
-import { CreatePetDto } from './dto/create-pet.dto';
-import { UpdatePetDto } from './dto/update-pet.dto';
-import { UserActiveInterface } from '../shared/interfaces/user-active.interface';
-import { ActiveUser } from '../shared/decorators/active-user.decorator';
-import { Auth } from '../auth/decorators/auth.decorator';
+
 
 
 @Auth()
