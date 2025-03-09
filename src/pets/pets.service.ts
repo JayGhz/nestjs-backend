@@ -33,19 +33,31 @@ export class PetsService {
     });
   }
 
-  async findAll() {
-    return `This action returns all pets`;
+  async findAll(): Promise<Pet[]> {
+    return this.petsRepository.find();
   }
 
-  async findOne(id: number) {
-    return `This action returns a #${id} pet`;
+  async findOne(id: number): Promise<Pet> {
+    const petExists = await this.petsRepository.findOneBy({ id });
+    if (!petExists) {
+      throw new BadRequestException(`Pet with id ${id} not found`);
+    }
+    return petExists;
   }
 
   async update(id: number, updatePetDto: UpdatePetDto) {
-    return `This action updates a #${id} pet`;
+    const petExists = await this.petsRepository.findOneBy({ id });
+    if (!petExists) {
+      throw new BadRequestException(`Pet with id ${id} not found`);
+    }
+    return await this.petsRepository.update({ id }, updatePetDto);
   }
 
   async remove(id: number) {
-    return `This action removes a #${id} pet`;
+    const petExists = await this.petsRepository.findOneBy({ id });
+    if (!petExists) {
+      throw new BadRequestException(`Pet with id ${id} not found`);
+    }
+    return await this.petsRepository.delete({ id });
   }
 }
