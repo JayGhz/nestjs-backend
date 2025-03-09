@@ -47,10 +47,15 @@ export class PetsService {
 
   async update(id: number, updatePetDto: UpdatePetDto) {
     const petExists = await this.petsRepository.findOneBy({ id });
+    const breed = await this.validateBreed(updatePetDto.breedName);
+
     if (!petExists) {
       throw new BadRequestException(`Pet with id ${id} not found`);
     }
-    return await this.petsRepository.update({ id }, updatePetDto);
+    return await this.petsRepository.update({ id }, {
+      ...updatePetDto,
+      breed
+    });
   }
 
   async remove(id: number) {
@@ -59,5 +64,13 @@ export class PetsService {
       throw new BadRequestException(`Pet with id ${id} not found`);
     }
     return await this.petsRepository.delete({ id });
+  }
+
+  private async validateBreed(breedName: string) {
+    const breed = await this.breedsRepository.findOneBy({ name: breedName });
+    if (!breed) {
+      throw new BadRequestException('Breed not found');
+    }
+    return breed;
   }
 }
