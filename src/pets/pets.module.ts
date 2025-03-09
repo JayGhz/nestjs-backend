@@ -1,10 +1,11 @@
+import { AuthModule } from '@/auth/auth.module';
+import { BreedsModule } from '@/breeds/breeds.module';
+import { Pet } from '@/pets/entities/pet.entity';
+import { PetsController } from '@/pets/pets.controller';
+import { PetsService } from '@/pets/pets.service';
 import { Module } from '@nestjs/common';
-import { PetsService } from '@/pets.service';
-import { PetsController } from '@/pets.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Pet } from '@/entities/pet.entity';
-import { BreedsModule } from '.@/breeds/breeds.module';
-import { AuthModule } from '.@/auth/auth.module';
+
 
 @Module({
   controllers: [PetsController],
