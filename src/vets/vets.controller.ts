@@ -6,7 +6,7 @@ import { VetsService } from '@/vets/vets.service';
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 
 
-Auth(Role.ADMIN)
+@Auth(Role.ADMIN)
 @Controller('vets')
 export class VetsController {
   constructor(private readonly vetsService: VetsService) {}

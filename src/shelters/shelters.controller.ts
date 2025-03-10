@@ -6,7 +6,7 @@ import { SheltersService } from '@/shelters/shelters.service';
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 
 
-Auth(Role.ADMIN)
+@Auth(Role.ADMIN)
 @Controller('shelters')
 export class SheltersController {
   constructor(private readonly sheltersService: SheltersService) { }
