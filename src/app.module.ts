@@ -22,6 +22,12 @@ import { BreedsModule } from '@/breeds/breeds.module';
       database: process.env.POSTGRES_DATABASE,
       autoLoadEntities: true,
       synchronize: true,
+      ssl: process.env.POSTGRES_SSL === 'true',
+      extra: {
+        ssl: process.env.POSTGRES_SSL === 'true'
+          ? { rejectUnauthorized: false }
+          : null,
+      },
     }),
     UsersModule,
     AuthModule,
