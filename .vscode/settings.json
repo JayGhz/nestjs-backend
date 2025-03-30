@@ -6,7 +6,5 @@
         "*.decorator.ts": "nest-decorator",
         "*.module.ts": "nest",
     },
-    "symbols.folders.associations": {
-        "test": "folder-sky",
-    },
+    "material-icon-theme.activeIconPack": "nest"
 }
